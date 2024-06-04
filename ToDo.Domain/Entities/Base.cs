@@ -4,7 +4,7 @@
     {
         public Base()
         {
-            Id = "";
+            Id = Guid.NewGuid().ToString();
             CreatedAt = DateTime.UtcNow;
             IsActive = true;
         }

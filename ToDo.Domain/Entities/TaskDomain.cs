@@ -1,16 +1,20 @@
 ﻿namespace ToDo.Domain.Entities
 {
-    public class Task : Base
+    public class TaskDomain : Base
     {
-        public static Task New(string name, string description, DateTime expireAt)
+        public static TaskDomain New(string name, string description, DateTime expireAt)
         {
-            return new Task
+            var task = new TaskDomain
             {
                 Name = name,
                 Description = description,
                 IsDone = false,
                 ExpireAt = expireAt,
             };
+
+            task.IsValid();
+
+            return task;
         }
 
         public string? Name { get; private set; }
@@ -46,9 +50,9 @@
 
         public bool IsValid()
         {
-            if (string.IsNullOrEmpty(Name) || Name.Length < 4) return false;
-            if (string.IsNullOrEmpty(Description) || Description.Length < 4) return false;
-            if (ExpireAt.Date < DateTime.UtcNow.Date) return false;
+            if (string.IsNullOrEmpty(Name) || Name.Length < 4) throw new ArgumentException("Name is invalid");
+            if (string.IsNullOrEmpty(Description) || Description.Length < 4) throw new ArgumentException("Description is invalid");
+            if (ExpireAt.Date < DateTime.UtcNow.Date) throw new ArgumentException("Expire At is invalid"); ;
 
             return true;
         }

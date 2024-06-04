@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="UseCases\**" />
+    <EmbeddedResource Remove="UseCases\**" />
+    <None Remove="UseCases\**" />
+  </ItemGroup>
+
 </Project>
